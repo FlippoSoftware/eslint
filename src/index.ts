@@ -1,7 +1,6 @@
 import type { OptionsConfig, TypedFlatConfigItem } from '@antfu/eslint-config';
 
 import antfu from '@antfu/eslint-config';
-import turboPlugin from 'eslint-plugin-turbo';
 import globals from 'globals';
 
 export const overridesStylisticConfig: Exclude<OptionsConfig['stylistic'], boolean | undefined>['overrides'] = {
@@ -64,9 +63,6 @@ export const overridesTsConfig: Exclude<OptionsConfig['typescript'], boolean | u
 };
 
 export const general: TypedFlatConfigItem[] = [{
-    plugins: {
-        turbo: turboPlugin
-    },
     rules: {
         'turbo/no-undeclared-env-vars': 'warn',
         'ts/consistent-type-definitions': ['error', 'type'],
