@@ -3,6 +3,14 @@
   "type": "module",
   "version": "1.0.0",
   "description": "ESLint configuration for Flippo. \n Separately, you need to install 'eslint'. For configuration with the reagent, you must additionally install 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh', '@eslint-react/eslint-plugin'. If necessary, 'eslint-plugin-turbo' can be installed for 'Turborepo'.",
+  "homepage": "https://github.com/FlippoSoftware/eslint#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlippoSoftware/eslint.git"
+  },
+  "bugs": {
+    "url": "https://github.com/FlippoSoftware/eslint/issues"
+  },
   "exports": {
     "types": "./dist/types/index.d.ts",
     "import": "./dist/index.js",
@@ -16,35 +24,27 @@
     "lint:fix": "eslint . --fix",
     "build": "rm -rf dist && tsc --build tsconfig.build.json --verbose --force"
   },
-  "simple-git-hooks": {
-    "pre-commit": "test \"$(git symbolic-ref --short HEAD)\" != main || { echo '✖ Direct commits to main are not allowed — create a feature branch.' >&2; exit 1; }",
-    "pre-push": "while read local_ref local_sha remote_ref remote_sha; do case \"$remote_ref\" in refs/heads/main) echo '✖ Direct pushes to main are not allowed — open a pull request.' >&2; exit 1;; esac; done"
-  },
   "peerDependencies": {
     "eslint": "^9.33.0"
   },
   "dependencies": {
-    "@antfu/eslint-config": "^5.2.1",
-    "eslint-plugin-format": "^1.0.1",
-    "globals": "^16.3.0"
+    "@antfu/eslint-config": "catalog:",
+    "eslint-plugin-format": "catalog:",
+    "globals": "catalog:"
   },
   "devDependencies": {
-    "@flippo/tsconfig": "^1.0.0",
-    "@types/node": "^22.18.0",
-    "eslint": "^9.33.0",
-    "jiti": "^2.5.1",
-    "typescript": "^5.9.2",
-    "simple-git-hooks": "^2.14.0"
+    "@flippo-software/tsconfig": "catalog:",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "jiti": "catalog:",
+    "simple-git-hooks": "catalog:",
+    "typescript": "catalog:"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "test \"$(git symbolic-ref --short HEAD)\" != main || { echo '✖ Direct commits to main are not allowed — create a feature branch.' >&2; exit 1; }",
+    "pre-push": "while read local_ref local_sha remote_ref remote_sha; do case \"$remote_ref\" in refs/heads/main) echo '✖ Direct pushes to main are not allowed — open a pull request.' >&2; exit 1;; esac; done"
   },
   "publishConfig": {
     "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/FlippoSoftware/eslint.git"
-  },
-  "homepage": "https://github.com/FlippoSoftware/eslint#readme",
-  "bugs": {
-    "url": "https://github.com/FlippoSoftware/eslint/issues"
   }
 }
