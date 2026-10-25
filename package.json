@@ -1,7 +1,7 @@
 {
   "name": "@flippo-software/eslint",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "packageManager": "pnpm@11.24.0",
   "description": "ESLint configuration for Flippo. \n Separately, you need to install 'eslint'. For configuration with the reagent, you must additionally install 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh', '@eslint-react/eslint-plugin'. If necessary, 'eslint-plugin-turbo' can be installed for 'Turborepo'.",
   "homepage": "https://github.com/FlippoSoftware/eslint#readme",
