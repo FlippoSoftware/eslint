@@ -1,4 +1,13 @@
-# pnpm settings of the package (not a workspace).
+# pnpm settings of the package (not a workspace). The first three are required by the pnpm rules of
+# @antfu/eslint-config (pnpm/yaml-enforce-settings).
+
+# Drop entries of minimumReleaseAgeExclude once they are old enough.
+minimumReleaseAgeExcludePrune: true
+# Refuse a version whose publication is less trusted than the previous ones (e.g. lost provenance).
+trustPolicy: no-downgrade
+# Run package scripts with pnpm's cross-platform shell.
+shellEmulator: true
+
 allowBuilds:
   # Its postinstall installs the git hooks; the `prepare` script already does it.
   simple-git-hooks: false

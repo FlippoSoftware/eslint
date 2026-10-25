@@ -2,6 +2,7 @@
   "name": "@flippo-software/eslint",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@11.24.0",
   "description": "ESLint configuration for Flippo. \n Separately, you need to install 'eslint'. For configuration with the reagent, you must additionally install 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh', '@eslint-react/eslint-plugin'. If necessary, 'eslint-plugin-turbo' can be installed for 'Turborepo'.",
   "homepage": "https://github.com/FlippoSoftware/eslint#readme",
   "repository": {
@@ -40,7 +41,7 @@
     "eslint": "^10.13.0",
     "jiti": "^2.7.0",
     "simple-git-hooks": "^2.14.0",
-    "typescript": "^7.0.2"
+    "typescript": "~6.0.3"
   },
   "simple-git-hooks": {
     "pre-commit": "test \"$(git symbolic-ref --quiet HEAD)\" != refs/heads/main || { echo \"Direct commits to main are not allowed. Create a feature branch.\" >&2; exit 1; }",
