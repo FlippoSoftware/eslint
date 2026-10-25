@@ -2,6 +2,7 @@
   "name": "@flippo-software/eslint",
   "type": "module",
   "version": "1.0.0",
+  "packageManager": "pnpm@11.24.0",
   "description": "ESLint configuration for Flippo. \n Separately, you need to install 'eslint'. For configuration with the reagent, you must additionally install 'eslint-plugin-react-hooks', 'eslint-plugin-react-refresh', '@eslint-react/eslint-plugin'. If necessary, 'eslint-plugin-turbo' can be installed for 'Turborepo'.",
   "homepage": "https://github.com/FlippoSoftware/eslint#readme",
   "repository": {
@@ -22,27 +23,31 @@
   "scripts": {
     "lint:check": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "build": "rm -rf dist && tsc --build tsconfig.build.json --verbose --force"
+    "build": "rm -rf dist && tsc --build tsconfig.build.json --verbose --force",
+    "prepare": "simple-git-hooks",
+    "hooks:install": "simple-git-hooks"
   },
   "peerDependencies": {
-    "eslint": "^9.33.0"
+    "eslint": "^10.13.0"
   },
   "dependencies": {
-    "@antfu/eslint-config": "catalog:",
-    "eslint-plugin-format": "catalog:",
-    "globals": "catalog:"
+    "@antfu/eslint-config": "^9.5.1",
+    "eslint-plugin-format": "^2.0.1",
+    "globals": "^17.13.0"
   },
   "devDependencies": {
-    "@flippo-software/tsconfig": "catalog:",
-    "@types/node": "catalog:",
-    "eslint": "catalog:",
-    "jiti": "catalog:",
-    "simple-git-hooks": "catalog:",
-    "typescript": "catalog:"
+    "@flippo-software/tsconfig": "1.0.0",
+    "@types/node": "^26.6.5",
+    "eslint": "^10.13.0",
+    "jiti": "^2.7.0",
+    "simple-git-hooks": "^2.14.0",
+    "typescript": "~6.0.3"
   },
   "simple-git-hooks": {
-    "pre-commit": "test \"$(git symbolic-ref --short HEAD)\" != main || { echo '✖ Direct commits to main are not allowed — create a feature branch.' >&2; exit 1; }",
-    "pre-push": "while read local_ref local_sha remote_ref remote_sha; do case \"$remote_ref\" in refs/heads/main) echo '✖ Direct pushes to main are not allowed — open a pull request.' >&2; exit 1;; esac; done"
+    "pre-commit": "test \"$(git symbolic-ref --quiet HEAD)\" != refs/heads/main || { echo \"Direct commits to main are not allowed. Create a feature branch.\" >&2; exit 1; }",
+    "pre-push": "while read -r local_ref local_sha remote_ref remote_sha; do if [ \"$remote_ref\" = refs/heads/main ]; then echo \"Direct pushes to main are not allowed. Open a pull request.\" >&2; exit 1; fi; done",
+    "pre-merge-commit": "test \"$(git symbolic-ref --quiet HEAD)\" != refs/heads/main || { echo \"Local merge commits on main are not allowed. Open a pull request.\" >&2; exit 1; }",
+    "preserveUnused": true
   },
   "publishConfig": {
     "access": "public"

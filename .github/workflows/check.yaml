@@ -1,27 +1,35 @@
 name: Check
 
 on:
-    pull_request:
-        branches:
-            - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
 
 jobs:
-    format-and-lint:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v4
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
 
-            - name: Install pnpm
-              uses: pnpm/action-setup@v2
-              
-            - name: Install Node.js
-              uses: actions/setup-node@v3
-              with:
-                node-version-file: ".nvmrc"
-                cache: "pnpm"
-            
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
+      # The pnpm version comes from `packageManager` in package.json.
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
 
-            - name: Check formatting & lint
-              run: pnpm lint:check
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Lint
+        run: pnpm lint:check
